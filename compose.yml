@@ -1,0 +1,43 @@
+services:
+  nextcloud:
+    image: nextcloud:28.0.1-apache
+    depends_on:
+      - nextcloud-database
+      - nextcloud-storage
+    ports:
+      - 8080:80
+    environment:
+      MYSQL_HOST: nextcloud-database
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      NEXTCLOUD_ADMIN_USER: admin
+      NEXTCLOUD_ADMIN_PASSWORD: admin
+      OBJECTSTORE_S3_HOST: nextcloud-storage
+      OBJECTSTORE_S3_BUCKET: nextcloud
+      OBJECTSTORE_S3_KEY: minio
+      OBJECTSTORE_S3_SECRET: minio123
+      OBJECTSTORE_S3_REGION: us-east-1
+      OBJECTSTORE_S3_USEPATH_STYLE: true
+      OBJECTSTORE_S3_PORT: 9000
+      OBJECTSTORE_S3_SSL: false
+      OBJECTSTORE_S3_AUTOCREATE: true
+
+  nextcloud-database:
+    image: mysql:8.0.34
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      TZ: "Asia/Tokyo"
+  
+  nextcloud-storage:
+    image: quay.io/minio/minio:RELEASE.2024-01-29T03-56-32Z
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+    command: server /data --console-address ":9001"
