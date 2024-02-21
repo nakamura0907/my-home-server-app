@@ -59,6 +59,9 @@ services:
       KC_DB_PASSWORD: password
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: password
+    extra_hosts:
+      - localhost:172.29.0.1
+      # 不要かも要検証
 
   keycloak-database:
     image: mysql:8.0.34
