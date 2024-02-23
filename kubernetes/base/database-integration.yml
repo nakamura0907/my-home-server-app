@@ -20,6 +20,7 @@ metadata:
 data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS nextcloud;
+    CREATE DATABASE IF NOT EXISTS keycloak;
     GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
     FLUSH PRIVILEGES;
 

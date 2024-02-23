@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak-deployment
+  template:
+    metadata:
+      labels:
+        app: keycloak-deployment
+    spec:
+      containers:
+      - name: keycloak
+        image: quay.io/keycloak/keycloak:23.0.6
+        command: ["start-dev"]
+        ports:
+        - containerPort: 8080
+        env:
+        - name: KC_DB
+          value: "mysql"
+        - name: KC_DB_URL
+          value: "jdbc:mysql://database-service-headless:3306/keycloak"
+        - name: KC_DB_USER
+          value: "user"
+        - name: KC_DB_PASSWORD
+          value: "password"
+        - name: KEYCLOAK_ADMIN
+          value: "admin"
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          value: "password"
