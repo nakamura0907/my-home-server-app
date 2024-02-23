@@ -1,0 +1,61 @@
+# see: https://qiita.com/higakin/items/b562eac58714d6681fa6
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-deployment
+  template:
+    metadata:
+      labels:
+        app: database-deployment
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0.34
+        volumeMounts:
+          - name: sql-init-volume
+            mountPath: /docker-entrypoint-initdb.d
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "root"
+        - name: MYSQL_USER
+          value: "user"
+        - name: MYSQL_PASSWORD
+          value: "password"
+        - name: TZ
+          value: "Asia/Tokyo"
+      volumes:
+        - name: sql-init-volume
+          configMap:
+            name: sql-init-configmap
+            items:
+              - key: init.sql
+                path: init.sql
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sql-init-configmap
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS nextcloud;
+    GRANT ALL PRIVILEGES ON *.* TO 'user'@'%';
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-service
+spec:
+  selector:
+    app: database-deployment
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
