@@ -1,4 +1,28 @@
-# see: https://qiita.com/higakin/items/b562eac58714d6681fa6
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-service-headless
+spec:
+  clusterIP: None
+  selector:
+    app: database-deployment
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sql-init-configmap
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS nextcloud;
+    GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
+    FLUSH PRIVILEGES;
+
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -47,27 +71,3 @@ spec:
       resources:
         requests:
           storage: 3Gi
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: sql-init-configmap
-data:
-  init.sql: |
-    CREATE DATABASE IF NOT EXISTS nextcloud;
-    GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
-    FLUSH PRIVILEGES;
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: database-service-headless
-spec:
-  clusterIP: None
-  selector:
-    app: database-deployment
-  ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306
