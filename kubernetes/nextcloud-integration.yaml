@@ -20,7 +20,7 @@ spec:
         - containerPort: 80
         env:
         - name: MYSQL_HOST
-          value: "database-service" 
+          value: "database-service-headless" 
         - name: MYSQL_DATABASE
           value: "nextcloud"
         - name: MYSQL_USER

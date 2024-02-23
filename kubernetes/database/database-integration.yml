@@ -1,7 +1,7 @@
 # see: https://qiita.com/higakin/items/b562eac58714d6681fa6
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: database-deployment
 spec:
@@ -18,6 +18,9 @@ spec:
       - name: mysql
         image: mysql:8.0.34
         volumeMounts:
+          - name: databaes-pvc-volume
+            mountPath: /var/lib/mysql
+            subPath: data
           - name: sql-init-volume
             mountPath: /docker-entrypoint-initdb.d
         env:
@@ -36,7 +39,14 @@ spec:
             items:
               - key: init.sql
                 path: init.sql
-
+  volumeClaimTemplates:
+  - metadata:
+      name: databaes-pvc-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 3Gi
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -45,14 +55,16 @@ metadata:
 data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS nextcloud;
-    GRANT ALL PRIVILEGES ON *.* TO 'user'@'%';
+    GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
+    FLUSH PRIVILEGES;
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: database-service
+  name: database-service-headless
 spec:
+  clusterIP: None
   selector:
     app: database-deployment
   ports:
