@@ -46,3 +46,5 @@ spec:
           value: "admin"
         - name: NEXTCLOUD_ADMIN_PASSWORD
           value: "admin"
+        - name: NEXTCLOUD_TRUSTED_DOMAINS
+          value: "*"

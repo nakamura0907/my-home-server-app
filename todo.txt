@@ -1,0 +1,45 @@
+- 信頼できないドメインを介したアクセス
+  'trusted_domains' => 
+  array (
+    0 => 'localhost',
+    1 => '3rdparty',
+    2 => 'AUTHORS',
+    3 => 'COPYING',
+    4 => 'apps',
+    5 => 'composer.json',
+    6 => 'composer.lock',
+    7 => 'config',
+    8 => 'console.php',
+    9 => 'core',
+    10 => 'cron.php',
+    11 => 'custom_apps',
+    12 => 'data',
+    13 => 'dist',
+    14 => 'index.html',
+    15 => 'index.php',
+    16 => 'lib',
+    17 => 'nextcloud-init-sync.lock',
+    18 => 'occ',
+    19 => 'ocs',
+    20 => 'ocs-provider',
+    21 => 'package-lock.json',
+    22 => 'package.json',
+    23 => 'public.php',
+    24 => 'remote.php',
+    25 => 'resources',
+    26 => 'robots.txt',
+    27 => 'status.php',
+    28 => 'themes',
+    29 => 'version.php',
+  ),
+
+- nextcloud更新時の対処
+nextcloud-deploymentを変更すると以下が発生してしまう
+    → マウントする？
+```
+The username is already being used
+Retrying install...
+```
+
+- 2024-02-25T09:43:47.696432Z 11 [Warning] [MY-013360] [Server] Plugin mysql_native_password reported: ''mysql_native_password' is deprecated and will be removed in a future release. Please use caching_sha2_password instead'
+
