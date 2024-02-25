@@ -26,3 +26,9 @@ $ kubectl wait --namespace ingress-nginx \
   --selector=app.kubernetes.io/component=controller \
   --timeout=90s
 ```
+
+## K3s
+
+```bash
+$ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+```
