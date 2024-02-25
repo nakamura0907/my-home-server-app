@@ -1,10 +1,2 @@
-- nextcloud更新時の対処
-nextcloud-deploymentを変更すると以下が発生してしまう
-    → PVCで解決するらしい -> Helmに移行？
-```
-The username is already being used
-Retrying install...
-```
-
 - 2024-02-25T09:43:47.696432Z 11 [Warning] [MY-013360] [Server] Plugin mysql_native_password reported: ''mysql_native_password' is deprecated and will be removed in a future release. Please use caching_sha2_password instead'
 
