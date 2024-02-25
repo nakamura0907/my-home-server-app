@@ -47,4 +47,4 @@ spec:
         - name: NEXTCLOUD_ADMIN_PASSWORD
           value: "admin"
         - name: NEXTCLOUD_TRUSTED_DOMAINS
-          value: "*"
+          value: "*.local:30080"
