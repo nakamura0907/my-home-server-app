@@ -32,3 +32,9 @@ $ kubectl wait --namespace ingress-nginx \
 ```bash
 $ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ```
+
+## Helm
+
+```bash
+$ helm show values \<chart\> > helm-values.yaml
+```

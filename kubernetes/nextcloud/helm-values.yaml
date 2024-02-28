@@ -385,10 +385,10 @@ cronjob:
   #   readOnlyRootFilesystem: true
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 80
   loadBalancerIP: ""
-  nodePort: 30080
+  nodePort: nil
 
 ## Enable persistence using Persistent Volume Claims
 ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
