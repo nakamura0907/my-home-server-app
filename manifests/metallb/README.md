@@ -5,6 +5,12 @@ $ kubectl create ns metallb-system
 $ helm install metallb metallb/metallb --namespace metallb-system
 ```
 
+### トラブルシューティング
+
+**<pending>になる**
+
+MetalLB Controllerのログを確認する
+
 ### K3sの場合
 
 ```bash

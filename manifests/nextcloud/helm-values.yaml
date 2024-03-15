@@ -76,7 +76,7 @@ phpClientHttpsFix:
   protocol: https
 
 nextcloud:
-  host: raspi-gou.local
+  host: 192.168.1.231
   username: admin
   password: password
   ## Use an existing secret
@@ -385,9 +385,9 @@ cronjob:
   #   readOnlyRootFilesystem: true
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
-  loadBalancerIP: ""
+  loadBalancerIP: 192.168.1.231
   nodePort: nil
 
 ## Enable persistence using Persistent Volume Claims
