@@ -1,3 +1,4 @@
+# TODO: IPAddressPoolとL2Advertisementに変更する
 apiVersion: v1
 kind: ConfigMap
 metadata:

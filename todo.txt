@@ -3,6 +3,10 @@
 
 # 問題
 - Ingress環境 Nextcloud ページが見つかりません
+- MetalLB svc <pending>でうまく行かない
+    - https://metallb.universe.tf/configuration/k3s/
+
+一旦、NodePortで。解決編をissue2として
 
 - 2024-02-25T09:43:47.696432Z 11 [Warning] [MY-013360] [Server] Plugin mysql_native_password reported: ''mysql_native_password' is deprecated and will be removed in a future release. Please use caching_sha2_password instead'
 
